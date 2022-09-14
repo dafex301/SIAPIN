@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +15,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-  return view('login.index');
+// Homepage
+Route::get('/', [HomeController::class, 'index'])->name('home');
+
+// Login Page
+Route::get('/login', [LoginController::class, 'index'])->middleware('guest')->name('login');
+Route::post('/login', [LoginController::class, 'authenticate'])->middleware('guest');
+
+// Dashboard
+Route::get('/dashboard', function () {
+  return view('dashboard.index', [
+    'title' => 'Dashboard | SIAPIN'
+  ])->name('dashboard');
 });
