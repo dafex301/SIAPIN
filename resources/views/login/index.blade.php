@@ -25,7 +25,7 @@
 
                         <input type="text" placeholder="NIM atau email" required name="identifier"
                             class="block text-sm py-3 px-4 rounded-lg w-full border outline-none" />
-                        <input type="text" placeholder="Password" required name="password"
+                        <input type="password" placeholder="Password" required name="password"
                             class="block text-sm py-3 px-4 rounded-lg w-full border outline-none" />
                     </div>
                     <div class="text-center mt-6">

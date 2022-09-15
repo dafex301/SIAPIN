@@ -1,8 +1,9 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,9 +23,8 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/login', [LoginController::class, 'index'])->middleware('guest')->name('login');
 Route::post('/login', [LoginController::class, 'authenticate'])->middleware('guest');
 
+// Logout
+Route::post('/logout', [LoginController::class, 'logout'])->middleware('auth')->name('logout');
+
 // Dashboard
-Route::get('/dashboard', function () {
-  return view('dashboard.index', [
-    'title' => 'Dashboard | SIAPIN'
-  ])->name('dashboard');
-});
+Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth')->name('dashboard');
