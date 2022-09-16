@@ -22,7 +22,25 @@ class DatabaseSeeder extends Seeder
       'password' => bcrypt('admin')
     ]);
 
-    DB::table('matkul')->insert([
+    DB::table('lab')->insert([
+      [
+        'nama_lab' => 'Lab A',
+        'lantai' => 3,
+        'kapasitas' => 30
+      ],
+      [
+        'nama_lab' => 'Lab B',
+        'lantai' => 2,
+        'kapasitas' => 40
+      ],
+      [
+        'nama_lab' => 'Lab C',
+        'lantai' => 2,
+        'kapasitas' => 30
+      ],
+    ]);
+
+    DB::table('matkuls')->insert([
       [
         'kode_matkul' => 'IF-401',
         'nama_matkul' => 'Pemrograman Web',
