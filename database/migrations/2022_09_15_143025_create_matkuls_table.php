@@ -18,6 +18,7 @@ return new class extends Migration
       $table->string('kode_matkul', 10);
       $table->string('nama_matkul', 100);
       $table->integer('pertemuan');
+      $table->timestamps();
     });
   }
 

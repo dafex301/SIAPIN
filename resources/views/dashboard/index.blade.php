@@ -2,5 +2,5 @@
 
 @section('container')
     @include('components.navbar')
-    <h1>Dashboard</h1>
+    @yield('dashboard_container')
 @endsection

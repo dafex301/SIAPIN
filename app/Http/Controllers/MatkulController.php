@@ -30,7 +30,10 @@ class MatkulController extends Controller
    */
   public function create()
   {
-    //
+    // Create mata kuliah
+    return view('dashboard.matkul.create', [
+      'title' => 'Tambah Mata Kuliah | SIAPIN'
+    ]);
   }
 
   /**
@@ -41,7 +44,17 @@ class MatkulController extends Controller
    */
   public function store(StoreMatkulRequest $request)
   {
-    //
+    // Store mata kuliah
+    $validatedData = $request->validate([
+      'kode_matkul' => ['required', 'string', 'max:255', 'unique:matkuls'],
+      'nama_matkul' => ['required', 'string', 'max:255'],
+      'pertemuan' => ['required', 'integer', 'min:1', 'max:12'],
+    ]);
+
+    Matkul::create($validatedData);
+
+    return redirect('/dashboard/matkul')
+      ->with('success', 'Mata kuliah berhasil ditambahkan');
   }
 
   /**

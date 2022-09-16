@@ -1,9 +1,7 @@
-@extends('layouts.main')
+@extends('dashboard.index')
 
-@section('container')
-    @include('components.navbar')
+@section('dashboard_container')
     {{-- Add matkul --}}
-
     {{-- Show table from $matkul --}}
     <table>
         <thead>
