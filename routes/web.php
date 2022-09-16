@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MatkulController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\QrCodeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,15 +21,31 @@ use App\Http\Controllers\DashboardController;
 // Homepage
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
+// // Login Page
+// Route::get('/login', [LoginController::class, 'index'])->middleware('guest')->name('login');
+// Route::post('/login', [LoginController::class, 'authenticate'])->middleware('guest');
+
+// // Logout
+// Route::post('/logout', [LoginController::class, 'logout'])->middleware('auth')->name('logout');
+
+// // Dashboard
+// Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth')->name('dashboard');
+
+// // CRUD Matkul
+// Route::resource('dashboard/matkul', MatkulController::class)->middleware('auth');
 // Login Page
 Route::get('/login', [LoginController::class, 'index'])->middleware('guest')->name('login');
 Route::post('/login', [LoginController::class, 'authenticate'])->middleware('guest');
 
 // Logout
-Route::post('/logout', [LoginController::class, 'logout'])->middleware('auth')->name('logout');
+Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 // Dashboard
-Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth')->name('dashboard');
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
 // CRUD Matkul
-Route::resource('dashboard/matkul', MatkulController::class)->middleware('auth');
+Route::resource('dashboard/matkul', MatkulController::class);
+
+// QR Code view 
+Route::get('dashboard/qrcode', [QrCodeController::class, 'index']);
+Route::post('dashboard/qrcode', [QrCodeController::class, 'generateQrCode']);
