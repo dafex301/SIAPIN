@@ -11,11 +11,11 @@
     </div>
 </div>
 
-<div id="profile-popup" class="bg-white shadow-lg rounded-xl h-30 w-36 absolute top-16 right-4 flex-row hidden">
+<div id="profile-popup" class="bg-white shadow-lg rounded-xl w-36 absolute top-16 right-4 flex-row hidden">
     <div class="p-2 px-4 hover:bg-gray-100 cursor-pointer text-gray-800 rounded-t-xl">Profile</div>
     <div class="p-2 px-4 hover:bg-gray-100 cursor-pointer text-gray-800">Settings</div>
     <div class="p-2 px-4 hover:bg-gray-100 cursor-pointer text-gray-800 rounded-b-xl">
-        <form action="/logout" method="POST">
+        <form action="/logout" method="POST" class="m-0">
             @csrf
             <button type="submit" class="">Logout</button>
         </form>

@@ -10,43 +10,51 @@
                         <tr>
                             <th
                                 class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
-                                Kode</th>
-                            <th
-                                class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
                                 Nama</th>
                             <th
                                 class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
-                                Total Pertemuan</th>
+                                Gedung</th>
+                            <th
+                                class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
+                                Lantai</th>
+                            <th
+                                class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
+                                Kapasitas</th>
                             <th
                                 class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
                                 Aksi</th>
                         </tr>
                     </thead>
                     <tbody class="bg-white">
-                        @foreach ($matkul as $m)
+                        @foreach ($lab as $l)
                             <tr>
                                 <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                                     <div class="flex items-center">
                                         <div class="">
                                             <div class="text-sm font-medium leading-5 text-gray-900">
-                                                {{ $m->kode_matkul }}
+                                                {{ $l->nama }}
                                             </div>
                                         </div>
                                     </div>
                                 </td>
                                 <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                                     <div class="text-sm leading-5 text-gray-500">
-                                        {{ $m->nama_matkul }}
+                                        {{ $l->gedung }}
                                     </div>
                                 </td>
                                 <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                                     <div class="text-sm leading-5 text-gray-500">
-                                        {{ $m->pertemuan }}
+                                        {{ $l->lantai }}
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+                                    <div class="text-sm leading-5 text-gray-500">
+                                        {{ $l->kapasitas }}
                                     </div>
                                 </td>
                                 <td class="flex gap-4 border-b border-gray-200 whitespace-no-wrap px-6 pt-4">
                                     {{-- Edit Button --}}
-                                    <a href="/dashboard/matkul/{{ $m->id }}/edit" class="">
+                                    <a href="/dashboard/lab/{{ $l->id }}/edit" class="">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-blue-400 cursor-pointer"
                                             fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -54,8 +62,8 @@
                                         </svg>
                                     </a>
                                     {{-- Delete Button --}}
-                                    <form action="/dashboard/matkul/{{ $m->id }}"
-                                        onsubmit="return confirm('Anda yakin untuk menghapus matkul ini?')" method="POST"
+                                    <form action="/dashboard/lab/{{ $l->id }}"
+                                        onsubmit="return confirm('Anda yakin untuk menghapus lab ini?')" method="POST"
                                         class="flex items-center">
                                         @method('delete')
                                         @csrf

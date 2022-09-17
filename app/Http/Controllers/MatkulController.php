@@ -78,7 +78,11 @@ class MatkulController extends Controller
    */
   public function edit(Matkul $matkul)
   {
-    //
+    // Edit mata kuliah
+    return view('dashboard.matkul.edit', [
+      'title' => 'Edit Mata Kuliah | SIAPIN',
+      'matkul' => $matkul
+    ]);
   }
 
   /**
@@ -90,7 +94,17 @@ class MatkulController extends Controller
    */
   public function update(UpdateMatkulRequest $request, Matkul $matkul)
   {
-    //
+    // Update mata kuliah
+    $validatedData = $request->validate([
+      'kode_matkul' => ['required', 'string', 'max:255', 'unique:matkuls,kode_matkul,' . $matkul->id],
+      'nama_matkul' => ['required', 'string', 'max:255'],
+      'pertemuan' => ['required', 'integer', 'min:1', 'max:12'],
+    ]);
+
+    $matkul->update($validatedData);
+
+    return redirect('/dashboard/matkul')
+      ->with('success', 'Mata kuliah berhasil diubah');
   }
 
   /**

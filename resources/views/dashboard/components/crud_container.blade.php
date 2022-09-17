@@ -4,7 +4,7 @@
     </h2>
     <a href="/dashboard/{{ $page }}/create">
         <div class="bg-green-500 rounded hover:bg-green-600 text-white py-2 mr-6 mt-4 px-4 items-center shadow-slate-50">
-            Add
+            Tambah
         </div>
     </a>
 </div>
