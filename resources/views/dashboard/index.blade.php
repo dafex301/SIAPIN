@@ -26,19 +26,19 @@
                 <div class="bg-white rounded-lg shadow-lg mt-4 flex flex-col">
                     <div>
                         <div
-                            class="flex items-center flex-row py-3 pl-3 hover:bg-gray-100 rounded-t-lg"
+                            class="flex items-center flex-row py-3 pl-3 hover:bg-gray-100 rounded-t-lg cursor-pointer"
                         >
                             <i class="fa-solid fa-house pr-2"></i>
                             <p class="">Home</p>
                         </div>
                         <div
-                            class="flex items-center flex-row py-3 pl-3 hover:bg-gray-100"
+                            class="flex items-center flex-row py-3 pl-3 hover:bg-gray-100 cursor-pointer"
                         >
                             <i class="fa-solid fa-user pr-3"></i>
                             <p>Manajemen Akun</p>
                         </div>
                         <div
-                            class="flex items-center flex-row py-3 pl-3 hover:bg-gray-100"
+                            class="flex items-center flex-row py-3 pl-3 hover:bg-gray-100 cursor-pointer"
                         >
                             <i class="fa-solid fa-user-group pr-2"></i>
                             <p>Data Mahasiswa</p>
@@ -51,11 +51,11 @@
                     <h2 class="text-left font-bold text-2xl pl-5 pt-4">
                         Manajemen Akun
                     </h2>
-                    <div
-                        class="bg-green-500 rounded text-white pt-1 mr-6 mt-4 px-4 items-center shadow-slate-50"
+                    <a
+                        class="bg-green-500 rounded text-white pt-1 mr-6 mt-4 px-4 items-center shadow-slate-50 cursor-pointer"
                     >
-                        Add
-                    </div>
+                        <div>Add</div></a
+                    >
                 </div>
                 <div class="flex flex-col items-center mt-4">
                     <div class="py-2 my-2 overflow-x-auto w-full px-6">
