@@ -19,6 +19,8 @@ class MatkulController extends Controller
 
     return view('dashboard.matkul.index', [
       'title' => 'Mata Kuliah | SIAPIN',
+      'page_title' => 'Daftar Mata Kuliah',
+      'page' => 'matkul',
       'matkul' => $matkul
     ]);
   }

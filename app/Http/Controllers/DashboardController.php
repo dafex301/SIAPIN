@@ -9,7 +9,8 @@ class DashboardController extends Controller
   public function index()
   {
     return view('dashboard.index', [
-      'title' => 'Dashboard | SIAPIN'
+      'title' => 'Dashboard | SIAPIN',
+      'page_title' => 'Dashboard'
     ]);
   }
 }
