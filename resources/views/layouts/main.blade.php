@@ -9,7 +9,7 @@
     <title>{{ $title }}</title>
 </head>
 
-<body>
+<body class="bg-gray-50">
     @yield('container')
 </body>
 

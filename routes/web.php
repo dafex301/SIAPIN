@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\MatkulController;
 use App\Http\Controllers\DashboardController;
 
 /*
@@ -28,3 +29,6 @@ Route::post('/logout', [LoginController::class, 'logout'])->middleware('auth')->
 
 // Dashboard
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth')->name('dashboard');
+
+// CRUD Matkul
+Route::resource('dashboard/matkul', MatkulController::class)->middleware('auth');

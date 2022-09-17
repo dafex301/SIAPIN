@@ -1,12 +1,16 @@
 @extends('layouts.main')
 
+
 <script
     src="https://kit.fontawesome.com/4569be348d.js"
     crossorigin="anonymous"
 ></script>
 
+
 <body class="bg-gray-50">
     @section('container')
+    @include('components.navbar')
+    @yield('dashboard_container')
     <div class="flex justify-center">
         <div class="flex justify-center gap-5 py-10 w-3/4">
             <div class="w-1/4">
