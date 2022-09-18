@@ -66,8 +66,16 @@ class UserController extends Controller
    * @param  \App\Models\User  $user
    * @return \Illuminate\Http\Response
    */
-  public function show(User $user)
+  public function show(User $mahasiswa)
   {
+    // Get the id from url
+    $user = User::find($mahasiswa->id);
+
+    // Show all data from user
+    return view('dashboard.mahasiswa.show', [
+      'title' => 'Detail Mahasiswa | SIAPIN',
+      'user' => $user
+    ]);
   }
 
   /**
@@ -76,11 +84,11 @@ class UserController extends Controller
    * @param  \App\Models\User  $user
    * @return \Illuminate\Http\Response
    */
-  public function edit(User $user)
+  public function edit(User $mahasiswa)
   {
     return view('dashboard.mahasiswa.edit', [
       'title' => 'Edit Mahasiswa | SIAPIN',
-      'user' => $user
+      'mahasiswa' => $mahasiswa,
     ]);
   }
 
@@ -91,8 +99,20 @@ class UserController extends Controller
    * @param  \App\Models\User  $user
    * @return \Illuminate\Http\Response
    */
-  public function update(Request $request, User $user)
+  public function update(Request $request, User $mahasiswa)
   {
+    // Validate input
+    $validatedData = $request->validate([
+      'nama' => 'required|string',
+      'nim' => 'required|string|unique:users,nim,' . $mahasiswa->id,
+      // Email could be null
+      'email' => 'nullable|email|unique:users,email,' . $mahasiswa->id,
+    ]);
+
+    // Update user
+    $mahasiswa->update($validatedData);
+
+    return redirect('/dashboard/mahasiswa')->with('status', 'Mahasiswa berhasil diubah!');
   }
 
   /**
@@ -101,8 +121,10 @@ class UserController extends Controller
    * @param  \App\Models\User  $user
    * @return \Illuminate\Http\Response
    */
-  public function destroy(User $user)
+  public function destroy(User $mahasiswa)
   {
-    //
+    $mahasiswa->delete();
+
+    return redirect('/dashboard/mahasiswa')->with('status', 'Mahasiswa berhasil dihapus!');
   }
 }

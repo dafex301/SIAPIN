@@ -1,6 +1,5 @@
 @extends('dashboard.index')
 @section('main_content')
-    {{ $user }}
     <div class="p-12 py-6">
         {{-- Back Button --}}
         <a href="/dashboard/mahasiswa" class="flex items-center gap-2 text-blue-400 hover:text-blue-600">
@@ -11,12 +10,12 @@
             <span>Kembali</span>
         </a>
         <h1 class="text-2xl font-bold my-5">Tambah Mahasiswa</h1>
-        <form action="/dashboard/mahasiswa" method="POST">
+        <form action="/dashboard/mahasiswa/{{ $mahasiswa->id }}" method="POST">
             @method('put')
             @csrf
             <div class="flex flex-col gap-3">
                 <label for="nama">Nama*</label>
-                <input value="{{ $user->nama }}" required type="text" name="nama" id="nama"
+                <input value="{{ $mahasiswa->nama }}" required type="text" name="nama" id="nama"
                     class="border border-gray-300 rounded-lg p-2">
                 {{-- Show error text --}}
                 @error('nama')
@@ -26,7 +25,7 @@
             </div>
             <div class="flex flex-col gap-3 mt-5">
                 <label for="nim">NIM*</label>
-                <input value="{{ $user->nim }}" required type="text" name="nim" id="nim"
+                <input value="{{ $mahasiswa->nim }}" required type="text" name="nim" id="nim"
                     class="border border-gray-300 rounded-lg p-2">
                 {{-- Show error text --}}
                 @error('nim')
@@ -35,7 +34,7 @@
             </div>
             <div class="flex flex-col gap-3 mt-5">
                 <label for="email">Email</label>
-                <input value="{{ $user->email }}" type="email" name="email" id="email"
+                <input value="{{ $mahasiswa->email }}" type="email" name="email" id="email"
                     class="border border-gray-300 rounded-lg p-2">
                 {{-- Show error text --}}
                 @error('email')
