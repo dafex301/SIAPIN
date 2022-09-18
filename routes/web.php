@@ -32,3 +32,10 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('aut
 
 // CRUD Matkul
 Route::resource('dashboard/matkul', MatkulController::class)->middleware('auth');
+
+Route::get('/popup', function () {
+    return view('popup');
+});
+
+// Mahasiswa
+Route::get('/mahasiswa', [MahasiswaController::class, 'mahasiswa'])->middleware('auth')->name('mahasiswa');
