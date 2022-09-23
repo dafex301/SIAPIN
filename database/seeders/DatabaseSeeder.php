@@ -111,5 +111,38 @@ class DatabaseSeeder extends Seeder
       ]
 
     ]);
+
+    DB::table('mahasiswas')->insert([
+      [
+        'nama' => 'Bruce Wayne',
+        'nim' => '2406013045231',
+        'phone' => '081234567890',
+        'email' => 'bruce@gmail.com',
+      ],
+      [
+        'nama' => 'Clark Kent',
+        'nim' => '2406012045232',
+        'phone' => '081234567891',
+        'email' => 'kent@gmail.com',
+      ],
+      [
+        'nama' => 'Diana Prince',
+        'nim' => '2406014045233',
+        'phone' => '081234567892',
+        'email' => 'diana@gmail.com',
+      ],
+      [
+        'nama' => 'Barry Allen',
+        'nim' => '2406015045234',
+        'phone' => '081234567893',
+        'email' => 'allen@gmail.com',
+      ],
+      [
+        'nama' => 'Hal Jordan',
+        'nim' => '2406016045235',
+        'phone' => '081234567894',
+        'email' => 'jordan@gmail.com',
+      ]
+    ]);
   }
 }

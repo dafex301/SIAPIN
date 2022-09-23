@@ -7,5 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class MhsPraktikum extends Model
 {
-    use HasFactory;
+    protected $fillable = [
+        'mahasiswa_id',
+        'jadwal_id',
+        'isPresent',
+    ];
 }

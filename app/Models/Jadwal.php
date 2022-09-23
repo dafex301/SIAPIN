@@ -7,5 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Jadwal extends Model
 {
-    use HasFactory;
+    protected $fillable = [
+        'matkul_id',
+        'lab_id',
+        'start',
+        'end'
+    ];
 }
+

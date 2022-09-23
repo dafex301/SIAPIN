@@ -16,6 +16,15 @@ class QrCodeController extends Controller
 
     public function generateQrCode(Request $request)
     {
+        //if user scan the qr code, then name and email will be sent to database
+
+        // //store data name and email
+        // $name = $request->name;
+        // $email = $request->email;
+
+        // //generate qr code
+        // $data = ($name . ' ' . $email);
+
         $this->validate($request, [
             'name' => 'required',
             'email' => 'required|email',
@@ -34,6 +43,13 @@ class QrCodeController extends Controller
         $qrCode = QrCode::size(500)->generate($data);
 
         return view('dashboard.qrcode.view', compact('qrCode'), [
+            'title' => 'QR Code | SIAPIN'
+        ]);
+    }
+
+    public function scanQrCode()
+    {
+        return view('dashboard.qrcode.scan', [
             'title' => 'QR Code | SIAPIN'
         ]);
     }

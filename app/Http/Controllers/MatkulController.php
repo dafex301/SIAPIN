@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Matkul;
-use App\Http\Requests\StoreMatkulRequest;
-use App\Http\Requests\UpdateMatkulRequest;
+// use App\Http\Requests\StoreMatkulRequest;
+// use App\Http\Requests\UpdateMatkulRequest;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class MatkulController extends Controller
 {
@@ -15,12 +17,8 @@ class MatkulController extends Controller
    */
   public function index()
   {
-    $matkul = Matkul::all();
-
-    return view('dashboard.matkul.index', [
-      'title' => 'Mata Kuliah | SIAPIN',
-      'matkul' => $matkul
-    ]);
+    $matkuls = Matkul::where('kode_matkul', '!=', null)->latest()->paginate(30);
+    return view('dashboard.matkul.index', compact('matkuls'));
   }
 
   /**
@@ -30,7 +28,10 @@ class MatkulController extends Controller
    */
   public function create()
   {
-    //
+    $matkuls = Matkul::where('kode_matkul', '!=', null)->latest()->paginate(30);
+    return response()->json([
+      'matkuls' => $matkuls
+    ]);
   }
 
   /**
@@ -39,9 +40,30 @@ class MatkulController extends Controller
    * @param  \App\Http\Requests\StoreMatkulRequest  $request
    * @return \Illuminate\Http\Response
    */
-  public function store(StoreMatkulRequest $request)
+  public function store(Request $request)
   {
-    //
+    $validator = Validator::make($request->all(), [
+      'kode_matkul' => 'required|unique:matkuls|max:7',
+      'nama_matkul' => 'required',
+      'pertemuan' => 'required',
+    ]);
+
+    if ($validator->fails()) {
+      return response()->json([
+        'status' => false,
+        'errors' => $validator->errors()->messages(),
+      ]);
+    } else {
+      $matkul = new Matkul();
+      $matkul->kode_matkul = $request->kode_matkul;
+      $matkul->nama_matkul = $request->nama_matkul;
+      $matkul->pertemuan = $request->pertemuan;
+      $matkul->save();
+      return response()->json([
+        'status' => true,
+        'success' => 'Mata Kuliah berhasil ditambahkan.',
+      ]);
+    }
   }
 
   /**
@@ -61,9 +83,10 @@ class MatkulController extends Controller
    * @param  \App\Models\Matkul  $matkul
    * @return \Illuminate\Http\Response
    */
-  public function edit(Matkul $matkul)
+  public function edit($id)
   {
-    //
+    $matkul = Matkul::all()->find($id);
+    return response()->json(['matkul' => $matkul]);
   }
 
   /**
@@ -73,9 +96,49 @@ class MatkulController extends Controller
    * @param  \App\Models\Matkul  $matkul
    * @return \Illuminate\Http\Response
    */
-  public function update(UpdateMatkulRequest $request, Matkul $matkul)
+  public function update(Request $request)
   {
-    //
+    $matkul = Matkul::all()->find($request->id);
+
+    if ($request->kode_matkul == $matkul->kode_matkul) {
+      $validator = Validator::make($request->all(), [
+        'pertemuan' => 'required',
+      ]);
+      if ($validator->fails()) {
+        return response()->json([
+          'status' => false,
+          'errors' => $validator->errors()->messages(),
+        ]);
+      } else {
+        $matkul->pertemuan = $request->pertemuan;
+        $matkul->save();
+        return response()->json([
+          'status' => true,
+          'success' => 'Mata Kuliah berhasil diubah.',
+        ]);
+      }
+    } else {
+      $validator = Validator::make($request->all(), [
+        'kode_matkul' => 'required|unique:matkuls|max:7',
+        'nama_matkul' => 'required',
+        'pertemuan' => 'required',
+      ]);
+      if ($validator->fails()) {
+        return response()->json([
+          'status' => false,
+          'errors' => $validator->errors()->messages(),
+        ]);
+      } else {
+        $matkul->kode_matkul = $request->kode_matkul;
+        $matkul->nama_matkul = $request->nama_matkul;
+        $matkul->pertemuan = $request->pertemuan;
+        $matkul->save();
+        return response()->json([
+          'status' => true,
+          'success' => 'Mata Kuliah berhasil di update.',
+        ]);
+      }
+    }
   }
 
   /**
@@ -84,12 +147,13 @@ class MatkulController extends Controller
    * @param  \App\Models\Matkul  $matkul
    * @return \Illuminate\Http\Response
    */
-  public function destroy(Matkul $matkul)
+  public function destroy($id)
   {
-    // Delete matkul
+    $matkul = Matkul::find($id);
     $matkul->delete();
-
-    // Redirect to /dashboard/matkul
-    return redirect('/dashboard/matkul')->with('success', 'Mata kuliah berhasil dihapus');
+    return response()->json([
+      'status' => true,
+      'success' => 'Mata Kuliah berhasil dihapus.',
+    ]);
   }
 }

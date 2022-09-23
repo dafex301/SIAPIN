@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Mahasiswa;
-use App\Http\Requests\StoreMahasiswaRequest;
-use App\Http\Requests\UpdateMahasiswaRequest;
+// use App\Http\Requests\StoreMahasiswaRequest;
+// use App\Http\Requests\UpdateMahasiswaRequest;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class MahasiswaController extends Controller
 {
@@ -15,7 +17,11 @@ class MahasiswaController extends Controller
      */
     public function index()
     {
-        //
+        $mahasiswas = Mahasiswa::where('nama', '!=', null)->latest()->paginate(5);
+
+        return view('dashboard.mahasiswa.index', [
+            'title' => 'Mahasiswa | SIAPIN'
+        ], compact('mahasiswas'));
     }
 
     /**
@@ -25,7 +31,10 @@ class MahasiswaController extends Controller
      */
     public function create()
     {
-        //
+        $mahasiswas = Mahasiswa::where('nama', '!=', null)->latest()->paginate(5);
+        return response()->json([
+            'mahasiswas' => $mahasiswas,
+        ]);
     }
 
     /**
@@ -34,9 +43,34 @@ class MahasiswaController extends Controller
      * @param  \App\Http\Requests\StoreMahasiswaRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreMahasiswaRequest $request)
+    public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'nama' => 'required',
+            'nim' => 'required|unique:mahasiswas|max:14',
+            'email' => 'required|unique:mahasiswas|max:50',
+            'phone' => 'required|unique:mahasiswas|max:14',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => false,
+                'errors' => $validator->errors()->messages(),
+            ]);
+        } else {
+            $mahasiswa = new Mahasiswa;
+            $mahasiswa->nama = $request->nama;
+            $mahasiswa->nim = $request->nim;
+            $mahasiswa->email = $request->email;
+            $mahasiswa->phone = $request->phone;
+
+            $mahasiswa->save();
+            return response()->json([
+                'status' => true,
+                'success' => 'Berhasil menambahkan mahasiswa.',
+            ]);
+        }
+        // return redirect('/dashboard/mahasiswa')->with('success', 'Mahasiswa berhasil ditambahkan');
     }
 
     /**
@@ -56,9 +90,10 @@ class MahasiswaController extends Controller
      * @param  \App\Models\Mahasiswa  $mahasiswa
      * @return \Illuminate\Http\Response
      */
-    public function edit(Mahasiswa $mahasiswa)
+    public function edit($id)
     {
-        //
+        $mahasiswa = Mahasiswa::all()->find($id);
+        return response()->json(['mahasiswa' => $mahasiswa]);
     }
 
     /**
@@ -68,9 +103,37 @@ class MahasiswaController extends Controller
      * @param  \App\Models\Mahasiswa  $mahasiswa
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateMahasiswaRequest $request, Mahasiswa $mahasiswa)
+    public function update(Request $request)
     {
-        //
+        $mahasiswa = Mahasiswa::all()->find($request->id);
+        $validator = Validator::make($request->all(), [
+            'nama' => 'required',
+            'nim' => 'required|max:14',
+            'email' => 'required|max:50',
+            'phone' => 'required|max:14',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => false,
+                'errors' => $validator->errors()->messages(),
+            ]);
+        } else {
+            $mahasiswa->nama = $request->nama;
+            $mahasiswa->nim = $request->nim;
+            $mahasiswa->email = $request->email;
+            $mahasiswa->phone = $request->phone;
+
+            $mahasiswa->save();
+            return response()->json([
+                'status' => true,
+                'success' => 'Berhasil update mahasiswa.',
+            ]);
+        }
+        // update
+        // $mahasiswa->update($request->all());
+
+        // return redirect()->route('dashboard.mahasiswa.index')->with('success', 'Mahasiswa berhasil diubah');
     }
 
     /**
@@ -79,8 +142,14 @@ class MahasiswaController extends Controller
      * @param  \App\Models\Mahasiswa  $mahasiswa
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Mahasiswa $mahasiswa)
+    public function destroy($id)
     {
-        //
+        // destroy
+        $mahasiswa = Mahasiswa::find($id);
+        $mahasiswa->delete();
+        return response()->json([
+            'status' => true,
+            'success' => 'Berasil menghapus mahasiswa.',
+        ]);
     }
 }
