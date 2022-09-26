@@ -1,10 +1,13 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LabController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MatkulController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\MahasiswaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,6 +35,13 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('aut
 
 // CRUD Matkul
 Route::resource('dashboard/matkul', MatkulController::class)->middleware('auth');
+
+// CRUD Lab
+Route::resource('dashboard/lab', LabController::class)->middleware('auth');
+
+// CRUD User
+Route::resource('dashboard/mahasiswa', UserController::class)->middleware('auth');
+
 
 Route::get('/popup', function () {
     return view('popup');
