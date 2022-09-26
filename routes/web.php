@@ -21,10 +21,10 @@ use App\Http\Controllers\MahasiswaController;
 */
 
 // Homepage
-Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/', [HomeController::class, 'index']);
 
 // Login Page
-Route::get('/login', [LoginController::class, 'index'])->middleware('guest')->name('login');
+Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/login', [LoginController::class, 'authenticate'])->middleware('guest');
 
 // Logout
@@ -41,3 +41,6 @@ Route::resource('dashboard/lab', LabController::class)->middleware('auth');
 
 // CRUD User
 Route::resource('dashboard/mahasiswa', UserController::class)->middleware('auth');
+
+// CRUD Jadwal
+Route::resource('dashboard/jadwal', JadwalController::class)->middleware('auth');

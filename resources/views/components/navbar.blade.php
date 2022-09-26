@@ -1,6 +1,6 @@
 <script defer src="{{ asset('js/navbar.js') }}"></script>
 
-<div class="bg-gray-900 justify-between items-center flex px-12 py-3">
+<div class="bg-zinc-900 justify-between items-center flex px-12 py-3">
     <a href="/dashboard">
         <img src="{{ asset('img/undip.png') }}" alt="Universitas Diponegoro" class="h-12">
     </a>

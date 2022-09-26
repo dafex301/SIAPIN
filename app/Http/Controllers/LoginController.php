@@ -9,6 +9,10 @@ class LoginController extends Controller
 {
   public function index()
   {
+    // If the user is already logged in, go to dashboard
+    if (Auth::check()) {
+      return redirect()->route('dashboard');
+    }
     return view('login.index', [
       'title' => 'Masuk | SIAPIN'
     ]);
