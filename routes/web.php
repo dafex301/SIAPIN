@@ -44,3 +44,10 @@ Route::resource('dashboard/mahasiswa', UserController::class)->middleware('auth'
 
 // CRUD Jadwal
 Route::resource('dashboard/jadwal', JadwalController::class)->middleware('auth');
+
+// Mahasiswa
+Route::get('/mahasiswa', [MahasiswaController::class, 'mahasiswa'])->middleware('auth')->name('mahasiswa');
+
+Route::get('/popup', function () {
+  return view('popup');
+});
