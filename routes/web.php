@@ -41,3 +41,11 @@ Route::resource('dashboard/lab', LabController::class)->middleware('auth');
 
 // CRUD User
 Route::resource('dashboard/mahasiswa', UserController::class)->middleware('auth');
+
+
+Route::get('/popup', function () {
+    return view('popup');
+});
+
+// Mahasiswa
+Route::get('/mahasiswa', [MahasiswaController::class, 'mahasiswa'])->middleware('auth')->name('mahasiswa');
