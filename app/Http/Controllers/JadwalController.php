@@ -15,11 +15,13 @@ class JadwalController extends Controller
    */
   public function index()
   {
-    $jadwals = Jadwal::all();
+    $jadwal = Jadwal::all();
 
-    return view('jadwal.index', [
+    return view('dashboard.jadwal.index', [
       'title' => 'Jadwal | SIAPIN',
-      'jadwals' => $jadwals
+      'jadwal' => $jadwal,
+      'page_title' => 'Daftar Jadwal',
+      'page' => 'jadwal'
     ]);
   }
 
@@ -30,7 +32,16 @@ class JadwalController extends Controller
    */
   public function create()
   {
-    //
+    $matkuls = \App\Models\Matkul::all();
+    $labs = \App\Models\Lab::all();
+    $users = \App\Models\User::all();
+
+    return view('dashboard.jadwal.create', [
+      'title' => 'Tambah Jadwal | SIAPIN',
+      'matkuls' => $matkuls,
+      'labs' => $labs,
+      'users' => $users
+    ]);
   }
 
   /**
@@ -41,7 +52,22 @@ class JadwalController extends Controller
    */
   public function store(StoreJadwalRequest $request)
   {
-    //
+    // Validate input
+    $validatedData = $request->validate([
+      'nama' => 'required|string',
+      'hari' => 'required|string',
+      'jam_mulai' => 'required|string',
+      'jam_selesai' => 'required|string',
+      'matkul_id' => 'required|integer',
+      'lab_id' => 'required|integer',
+      'asprak_1' => 'required|integer',
+      'asprak_2' => 'string|nullable',
+    ]);
+
+    // Create jadwal
+    Jadwal::create($validatedData);
+
+    return redirect('/dashboard/jadwal')->with('status', 'Jadwal berhasil ditambahkan!');
   }
 
   /**
@@ -63,7 +89,17 @@ class JadwalController extends Controller
    */
   public function edit(Jadwal $jadwal)
   {
-    //
+    $matkuls = \App\Models\Matkul::all();
+    $labs = \App\Models\Lab::all();
+    $users = \App\Models\User::all();
+
+    return view('dashboard.jadwal.edit', [
+      'title' => 'Edit Jadwal | SIAPIN',
+      'jadwal' => $jadwal,
+      'matkuls' => $matkuls,
+      'labs' => $labs,
+      'users' => $users
+    ]);
   }
 
   /**
@@ -75,7 +111,22 @@ class JadwalController extends Controller
    */
   public function update(UpdateJadwalRequest $request, Jadwal $jadwal)
   {
-    //
+    // Validate input
+    $validatedData = $request->validate([
+      'nama' => 'required|string',
+      'hari' => 'required|string',
+      'jam_mulai' => 'required|string',
+      'jam_selesai' => 'required|string',
+      'matkul_id' => 'required|integer',
+      'lab_id' => 'required|integer',
+      'asprak_1' => 'required|integer',
+      'asprak_2' => 'string|nullable',
+    ]);
+
+    // Update jadwal
+    $jadwal->update($validatedData);
+
+    return redirect('/dashboard/jadwal')->with('status', 'Jadwal berhasil diubah!');
   }
 
   /**
@@ -86,6 +137,9 @@ class JadwalController extends Controller
    */
   public function destroy(Jadwal $jadwal)
   {
-    //
+    // Delete jadwal
+    $jadwal->delete();
+
+    return redirect('/dashboard/jadwal')->with('status', 'Jadwal berhasil dihapus!');
   }
 }

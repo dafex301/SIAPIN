@@ -16,4 +16,10 @@ class Lab extends Model
     'gedung',
     'kapasitas'
   ];
+
+  // Relationship with jadwal
+  public function jadwal()
+  {
+    return $this->hasMany(Jadwal::class);
+  }
 }

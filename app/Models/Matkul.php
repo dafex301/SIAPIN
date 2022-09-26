@@ -15,4 +15,10 @@ class Matkul extends Model
     'nama_matkul',
     'pertemuan'
   ];
+
+  // Relationship with jadwal
+  public function jadwal()
+  {
+    return $this->hasMany(Jadwal::class);
+  }
 }

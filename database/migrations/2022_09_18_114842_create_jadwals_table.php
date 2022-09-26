@@ -16,16 +16,17 @@ return new class extends Migration
     Schema::create('jadwals', function (Blueprint $table) {
       $table->id();
       $table->timestamps();
+      $table->string('nama');
       // Lab ID as foreign key
       $table->foreignId('lab_id')->constrained('labs');
       // Matkul ID as foreign key
       $table->foreignId('matkul_id')->constrained('matkuls');
-      // NIM Asprak as foreign key
-      $table->string('asprak_1');
-      $table->foreign('asprak_1')->references('nim')->on('users');
-      // NIM Asprak as foreign key and could be nullable
-      $table->string('asprak_2')->nullable();
-      $table->foreign('asprak_2')->references('nim')->on('users')->nullable();
+      $table->foreignId('asprak_1')->constrained('users');
+
+      // $table->foreign('asprak_1')->references('id')->on('users');
+      // Asprak 2 is foreign key from users table, nullable
+      $table->foreignId('asprak_2')->nullable()->constrained('users');
+
       // Day and Time
       $table->string('hari', 10);
       $table->time('jam_mulai');
