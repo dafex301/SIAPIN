@@ -20,6 +20,8 @@ class DatabaseSeeder extends Seeder
       MatkulSeeder::class,
       LabSeeder::class,
       JadwalSeeder::class,
+      IrsSeeder::class,
+      PresensiSeeder::class,
     ]);
   }
 }

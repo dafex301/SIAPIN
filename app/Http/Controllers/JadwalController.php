@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Irs;
 use App\Models\Jadwal;
 use App\Http\Requests\StoreJadwalRequest;
 use App\Http\Requests\UpdateJadwalRequest;
@@ -78,7 +79,14 @@ class JadwalController extends Controller
    */
   public function show(Jadwal $jadwal)
   {
-    //
+    // Get the irs where the jadwal_id is the same as the jadwal id
+    $irs = Irs::where('jadwal_id', $jadwal->id)->get();
+
+    return view('dashboard.jadwal.show', [
+      'title' => 'Detail Jadwal | SIAPIN',
+      'jadwal' => $jadwal,
+      'irs' => $irs
+    ]);
   }
 
   /**
