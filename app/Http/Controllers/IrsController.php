@@ -41,12 +41,14 @@ class IrsController extends Controller
     $users_id = $request->user_id;
     $jadwal_id = $request->jadwal_id;
 
-    // Create the irs for every $user_id from $users_id with $jadwal_id
-    foreach ($users_id as $user_id) {
-      Irs::create([
-        'user_id' => $user_id,
-        'jadwal_id' => $jadwal_id
-      ]);
+    // Create the irs for every $user_id from $users_id with $jadwal_id IF there is users_id
+    if ($users_id) {
+      foreach ($users_id as $user_id) {
+        Irs::create([
+          'user_id' => $user_id,
+          'jadwal_id' => $jadwal_id
+        ]);
+      }
     }
 
     return redirect('/dashboard/jadwal/' . $jadwal_id)->with('status', 'Mahasiswa berhasil ditambahkan!');
@@ -69,12 +71,7 @@ class IrsController extends Controller
     // Get jadwal with id from url
     $jadwal = Jadwal::find($id);
 
-    // Get all user data minus user_id from irs table with jadwal_id = $id
-    // Also minus the users data with id jadwal->asprak_1 or jadwal->asprak_2
-    // And without the user with nama = admin
-    $users = User::whereNotIn('id', function ($query) use ($id) {
-      $query->select('user_id')->from('irs')->where('jadwal_id', $id);
-    })->whereNotIn('id', [$jadwal->asprak_1, $jadwal->asprak_2])->where('nama', '!=', 'admin')->get();
+    $users = User::where('nama', '!=', 'admin')->where('id', '!=', $jadwal->asprak_1)->where('id', '!=', $jadwal->asprak_2)->get();
 
     return view('dashboard.jadwal.mhs', [
       'title' => 'Tambah Mahasiswa | SIAPIN',

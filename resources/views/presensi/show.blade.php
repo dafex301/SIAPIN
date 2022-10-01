@@ -2,18 +2,26 @@
 @section('main_content')
     <div class="p-12 py-6">
         {{-- Back Button --}}
-        <a href="/dashboard/jadwal" class="flex items-center gap-2 text-blue-400 hover:text-blue-600">
+        <a href="/dashboard/presensi" class="flex items-center gap-2 text-blue-400 hover:text-blue-600">
             {{-- Back Icon --}}
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
             </svg>
             <span>Kembali</span>
         </a>
-        <h1 class="text-2xl font-bold mt-5">Detail Presensi</h1>
-        <h2 class="text-xl">{{ $jadwal->nama }}</h2>
-        <h2>{{ $jadwal->lab->nama }} |
-            {{ $jadwal->hari . ', ' . date('H:i', strtotime($jadwal->jam_mulai)) . '-' . date('H:i', strtotime($jadwal->jam_selesai)) }}
-        </h2>
+        <div class="flex mt-5 justify-between">
+            <div>
+                <h1 class="text-2xl font-bold">Detail Presensi</h1>
+                <h2 class="text-xl">{{ $jadwal->nama }}</h2>
+                <h2>{{ $jadwal->lab->nama }} |
+                    {{ $jadwal->hari . ', ' . date('H:i', strtotime($jadwal->jam_mulai)) . '-' . date('H:i', strtotime($jadwal->jam_selesai)) }}
+                </h2>
+            </div>
+            <a href="/dashboard/presensi/{{ $jadwal->id }}/{{ $_GET['p'] ?? '1' }}/qr"
+                class="bg-blue-500 px-4 flex items-center text-white h-10 hover:bg-blue-700 rounded-md">
+                Generate QR Code
+            </a>
+        </div>
         <div class="flex justify-between items-center">
             <h3 class="text-md font-semibold my-5">List Peserta</h3>
             {{-- Dropdown of pertemuan --}}
@@ -93,31 +101,48 @@
                         </td>
                         <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                             <div class="text-sm leading-5 text-gray-500">
-                                Tidak Hadir
+                                {{-- Check if there is presensis data with irs->id and pertemuan from url --}}
+                                @if ($presensi->where('pertemuan', $_GET['p'] ?? 1)->where('irs_id', $i->id)->count() > 0)
+                                    <span
+                                        class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                                        Hadir
+                                    </span>
+                                @else
+                                    <span
+                                        class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">
+                                        Tidak Hadir
+                                    </span>
+                                @endif
+
                             </div>
                         </td>
                         <td class="flex gap-4 border-b border-gray-200 whitespace-no-wrap px-6 pt-6 pb-2">
                             {{-- Present and not present button --}}
-                            <form action="/dashboard/presensi/{{ $jadwal->id }}/{{ $i->user->id }}" method="POST">
-                                @csrf
-                                <button type="submit"
-                                    class="inline-flex justify-center w-full rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-600 text-sm leading-5 font-medium text-white hover:bg-green-500 focus:outline-none focus:border-green-700 focus:shadow-outline-green active:bg-green-700 transition ease-in-out duration-150">
-                                    Hadir
-                                </button>
-                            </form>
-                            <form action="/dashboard/presensi/{{ $jadwal->id }}/{{ $i->user->id }}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit"
-                                    class="inline-flex justify-center w-full rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-sm leading-5 font-medium text-white hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-700 transition ease-in-out duration-150">
-                                    Reset
-                                </button>
-                            </form>
-
+                            @if ($presensi->where('pertemuan', $_GET['p'] ?? 1)->where('irs_id', $i->id)->count() > 0)
+                                <form action="/dashboard/presensi/{{ $i->id }}?p={{ $_GET['p'] ?? '1' }}"
+                                    method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit"
+                                        class="bg-red-500 hover:bg-red-700 text-white inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 text-sm leading-5 font-medium focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-50 active:text-gray-800 transition ease-in-out duration-150">
+                                        Reset
+                                    </button>
+                                </form>
+                            @else
+                                <form action="/dashboard/presensi/{{ $i->id }}?p={{ $_GET['p'] ?? '1' }}"
+                                    method="POST">
+                                    @csrf
+                                    <button type="submit"
+                                        class="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-green-500 text-white hover:bg-green-700 text-sm leading-5 font-medium  focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-50 active:text-gray-800 transition ease-in-out duration-150">
+                                        Hadir
+                                    </button>
+                                </form>
+                            @endif
                         </td>
                     </tr>
                 @endforeach
+            </tbody>
         </table>
-        </tbody>
-        </table>
-    @endsection
+    </div>
+    </div>
+@endsection

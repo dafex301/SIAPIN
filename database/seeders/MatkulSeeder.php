@@ -19,7 +19,7 @@ class MatkulSeeder extends Seeder
       [
         'kode_matkul' => 'IF-401',
         'nama_matkul' => 'Pemrograman Web',
-        'pertemuan' => 12
+        'pertemuan' => 6
       ],
       [
         'kode_matkul' => 'IF-402',

@@ -1,7 +1,9 @@
 @extends('dashboard.index')
 
 @section('main_content')
-    @include('dashboard.components.crud_container')
+    <h2 class="text-left font-bold text-2xl pl-5 pt-4">
+        {{ $page_title }}
+    </h2>
     <div class="flex flex-col items-center mt-4">
         <div class="py-2 my-2 overflow-x-auto w-full px-6">
             <div class="inline-block w-full overflow-hidden align-middle border-b border-gray-200 shadow sm:rounded-lg">

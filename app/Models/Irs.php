@@ -25,4 +25,10 @@ class Irs extends Model
   {
     return $this->belongsTo(Jadwal::class);
   }
+
+  // Every 1 IRS have many presensi
+  public function presensi()
+  {
+    return $this->hasMany(Presensi::class);
+  }
 }
