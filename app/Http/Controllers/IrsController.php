@@ -71,7 +71,8 @@ class IrsController extends Controller
     // Get jadwal with id from url
     $jadwal = Jadwal::find($id);
 
-    $users = User::where('nama', '!=', 'admin')->where('id', '!=', $jadwal->asprak_1)->where('id', '!=', $jadwal->asprak_2)->get();
+    // TODO : Hapus user yang udah ada di irs
+    $users = User::where('nim', '!=', '123')->where('id', '!=', $jadwal->asprak_1)->where('id', '!=', $jadwal->asprak_2)->get();
 
     return view('dashboard.jadwal.mhs', [
       'title' => 'Tambah Mahasiswa | SIAPIN',

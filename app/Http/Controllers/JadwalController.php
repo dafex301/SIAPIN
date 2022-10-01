@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Irs;
+use App\Models\Lab;
+use App\Models\User;
 use App\Models\Jadwal;
+use App\Models\Matkul;
 use App\Http\Requests\StoreJadwalRequest;
 use App\Http\Requests\UpdateJadwalRequest;
 
@@ -33,9 +36,9 @@ class JadwalController extends Controller
    */
   public function create()
   {
-    $matkuls = \App\Models\Matkul::all();
-    $labs = \App\Models\Lab::all();
-    $users = \App\Models\User::all();
+    $matkuls = Matkul::all();
+    $labs = Lab::all();
+    $users = User::all();
 
     return view('dashboard.jadwal.create', [
       'title' => 'Tambah Jadwal | SIAPIN',
