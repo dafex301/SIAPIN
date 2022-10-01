@@ -65,7 +65,7 @@
                                         @endif
                                     </div>
                                 </td>
-                                <td class="flex gap-4 border-b border-gray-200 whitespace-no-wrap px-6 pt-6 pb-2">
+                                <td class="flex gap-4 border-b border-gray-200 whitespace-no-wrap px-6 pt-8 pb-5">
                                     <a href="/dashboard/jadwal/{{ $j->id }}" class="">
                                         <i class="fa fa-eye scale-110 text-green-600 hover:text-green-800 pt-1 mr-1"></i>
                                     </a>
