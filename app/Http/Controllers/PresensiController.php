@@ -128,6 +128,27 @@ class PresensiController extends Controller
    */
   public function destroy(Presensi $presensi)
   {
+    // Get user id
+    $irs_id = $presensi->id;
+
+    // get pertemuan from url parameter p
+    $p = request()->p;
+
+    // Delete the presensi
+    Presensi::where('irs_id', $irs_id)->where('pertemuan', $p)->delete();
+
+    // Redirect to the previous page
+    return redirect()->back();
+  }
+
+  /**
+   * Remove the specified resource from storage.
+   *
+   * @param  \App\Models\Presensi  $presensi
+   * @return \Illuminate\Http\Response
+   */
+  public function destroyQR(Presensi $presensi)
+  {
     $id = request()->id;
     $jadwal_id = request()->jadwal_id;
     $pertemuan = request()->pertemuan;
@@ -136,7 +157,7 @@ class PresensiController extends Controller
     Qr::destroy($id);
 
     // Redirect to /dashboard/presensi/ $jadwal_id ?p= $pertemuan
-    // return redirect('/dashboard/presensi/' . $jadwal_id . '?p=' . $pertemuan);
+    return redirect('/dashboard/presensi/' . $jadwal_id . '?p=' . $pertemuan);
   }
 
   public function generateQr()

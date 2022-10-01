@@ -23,38 +23,50 @@ class UserSeeder extends Seeder
         'password' => bcrypt('admin')
       ],
       [
-        'nama' => 'Fahrel',
+        'nama' => 'Fahrel Gibran Alghany',
         'nim' => '24060120130106',
         'email' => 'fahrel@students.undip.ac.id',
         'password' => bcrypt('fahrel')
       ],
       [
-        'nama' => 'Gibran',
+        'nama' => 'Rayhan Ilyas Annabil',
         'nim' => '24060120130107',
-        'email' => 'Gibran@students.undip.ac.id',
-        'password' => bcrypt('gibran')
+        'email' => 'rayhan@students.undip.ac.id',
+        'password' => bcrypt('rayhan')
       ],
       [
-        'nama' => 'Alghany',
+        'nama' => 'Rifan Fatoni Febrianto',
         'nim' => '24060120130108',
-        'email' => 'Alghany@students.undip.ac.id',
-        'password' => bcrypt('alghany')
+        'email' => 'rifan@students.undip.ac.id',
+        'password' => bcrypt('rifan')
       ],
       [
-        'nama' => 'Luffy',
+        'nama' => 'Hanan Nurul Zain',
         'nim' => '24060120130109',
+        'email' => 'hanan@students.undip.ac.id',
+        'password' => bcrypt('hanan')
+      ],
+      [
+        'nama' => 'Fiqih Ikhsan',
+        'nim' => '24060120130110',
+        'email' => 'fiqih@students.undip.ac.id',
+        'password' => bcrypt('fiqih')
+      ],
+      [
+        'nama' => 'Monkey D. Luffy',
+        'nim' => '24060120130111',
         'email' => 'luffy@students.undip.ac.id',
         'password' => bcrypt('luffy')
       ],
       [
-        'nama' => 'zoro',
-        'nim' => '24060120130110',
+        'nama' => 'Roronoa Zoro',
+        'nim' => '24060120130112',
         'email' => 'zoro@students.undip.ac.id',
         'password' => bcrypt('zoro')
       ],
       [
-        'nama' => 'sanji',
-        'nim' => '24060120130111',
+        'nama' => 'Vinsmoke Sanji',
+        'nim' => '24060120130113',
         'email' => 'sanji@students.undip.ac.id',
         'password' => bcrypt('sanji')
       ],

@@ -116,6 +116,7 @@
 
                             </div>
                         </td>
+
                         <td class="flex gap-4 border-b border-gray-200 whitespace-no-wrap px-6 pt-6 pb-2">
                             {{-- Present and not present button --}}
                             @if ($presensi->where('pertemuan', $_GET['p'] ?? 1)->where('irs_id', $i->id)->count() > 0)

@@ -65,7 +65,7 @@ Route::delete('/dashboard/presensi/{presensi}', [PresensiController::class, 'des
 
 // Generate QR Code
 Route::get('/dashboard/presensi/{jadwal_id}/{pertemuan}/qr', [PresensiController::class, 'generateQR'])->middleware('admin')->name('presensi.qr');
-Route::delete('/dashboard/presensi/{jadwal_id}/{pertemuan}/qr/{id}', [PresensiController::class, 'destroy'])->middleware('admin')->name('qr.destroy');
+Route::delete('/dashboard/presensi/{jadwal_id}/{pertemuan}/qr/{id}', [PresensiController::class, 'destroyQR'])->middleware('admin')->name('qr.destroy');
 
 // Presensi Mahasiswa Route
 Route::get('/dashboard/mhs/presensi', [PresensiMhsController::class, 'index'])->middleware('auth')->name('presensi.mhs');
