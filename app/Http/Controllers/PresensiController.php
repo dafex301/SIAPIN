@@ -128,20 +128,15 @@ class PresensiController extends Controller
    */
   public function destroy(Presensi $presensi)
   {
-    // Get the p parameter from URL
-    $p = request()->p;
+    $id = request()->id;
+    $jadwal_id = request()->jadwal_id;
+    $pertemuan = request()->pertemuan;
 
-    // Get id from url
-    $irs_id = $presensi->id;
+    // Delete qr with id $id
+    Qr::destroy($id);
 
-    // Get presensi with irs_id and pertemuan p
-    $presensi = Presensi::where('irs_id', $irs_id)->where('pertemuan', $p)->first();
-
-    // Delete the presensi
-    $presensi->delete();
-
-    // Redirect to the previous page
-    return redirect()->back();
+    // Redirect to /dashboard/presensi/ $jadwal_id ?p= $pertemuan
+    // return redirect('/dashboard/presensi/' . $jadwal_id . '?p=' . $pertemuan);
   }
 
   public function generateQr()
@@ -182,12 +177,5 @@ class PresensiController extends Controller
       'random_string' => $random_string,
       'jadwal' => $jadwal,
     ]);
-  }
-
-  public function deleteQr($qr_id)
-  {
-    // Delete the qr code after some time using delayedDelete method
-    $qr = new Qr;
-    $qr->delayedDelete($qr_id, 10);
   }
 }

@@ -11,6 +11,7 @@ use App\Http\Controllers\MatkulController;
 use App\Http\Controllers\PresensiController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MahasiswaController;
+use App\Http\Controllers\PresensiMhsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,33 +38,39 @@ Route::post('/logout', [LoginController::class, 'logout'])->middleware('auth')->
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth')->name('dashboard');
 
 // CRUD Matkul
-Route::resource('dashboard/matkul', MatkulController::class)->middleware('auth');
+Route::resource('dashboard/matkul', MatkulController::class)->middleware('admin');
 
 // CRUD Lab
-Route::resource('dashboard/lab', LabController::class)->middleware('auth');
+Route::resource('dashboard/lab', LabController::class)->middleware('admin');
 
 // CRUD User
-Route::resource('dashboard/mahasiswa', UserController::class)->middleware('auth');
+Route::resource('dashboard/mahasiswa', UserController::class)->middleware('admin');
 
 // CRUD Jadwal
-Route::resource('dashboard/jadwal', JadwalController::class)->middleware('auth');
+Route::resource('dashboard/jadwal', JadwalController::class)->middleware('admin');
 
 // Mahasiswa
-Route::get('/mahasiswa', [MahasiswaController::class, 'mahasiswa'])->middleware('auth')->name('mahasiswa');
+Route::get('/mahasiswa', [MahasiswaController::class, 'mahasiswa'])->middleware('admin')->name('mahasiswa');
 
 // Show the IRS with given ID of jadwal from url
-Route::get('/dashboard/jadwal/{jadwal_id}/mhs', [IrsController::class, 'show'])->middleware('auth')->name('irs.show');
-Route::delete('/dashboard/jadwal/{jadwal_id}/mhs/{user_id}', [IrsController::class, 'destroy'])->middleware('auth')->name('irs.destroy');
-Route::post('/dashboard/jadwal/{jadwal_id}/mhs', [IrsController::class, 'store'])->middleware('auth')->name('irs.store');
+Route::get('/dashboard/jadwal/{jadwal_id}/mhs', [IrsController::class, 'show'])->middleware('admin')->name('irs.show');
+Route::delete('/dashboard/jadwal/{jadwal_id}/mhs/{user_id}', [IrsController::class, 'destroy'])->middleware('admin')->name('irs.destroy');
+Route::post('/dashboard/jadwal/{jadwal_id}/mhs', [IrsController::class, 'store'])->middleware('admin')->name('irs.store');
 
 // Presensi Route
-Route::get('/dashboard/presensi', [PresensiController::class, 'index'])->middleware('auth')->name('presensi');
-Route::get('/dashboard/presensi/{presensi}', [PresensiController::class, 'show'])->middleware('auth')->name('presensi.show');
-Route::post('/dashboard/presensi/{presensi}', [PresensiController::class, 'store'])->middleware('auth')->name('presensi.store');
-Route::delete('/dashboard/presensi/{presensi}', [PresensiController::class, 'destroy'])->middleware('auth')->name('presensi.destroy');
+Route::get('/dashboard/presensi', [PresensiController::class, 'index'])->middleware('admin')->name('presensi');
+Route::get('/dashboard/presensi/{presensi}', [PresensiController::class, 'show'])->middleware('admin')->name('presensi.show');
+Route::post('/dashboard/presensi/{presensi}', [PresensiController::class, 'store'])->middleware('admin')->name('presensi.store');
+Route::delete('/dashboard/presensi/{presensi}', [PresensiController::class, 'destroy'])->middleware('admin')->name('presensi.destroy');
 
 // Generate QR Code
-Route::get('/dashboard/presensi/{jadwal_id}/{pertemuan}/qr', [PresensiController::class, 'generateQR'])->middleware('auth')->name('presensi.qr');
+Route::get('/dashboard/presensi/{jadwal_id}/{pertemuan}/qr', [PresensiController::class, 'generateQR'])->middleware('admin')->name('presensi.qr');
+Route::delete('/dashboard/presensi/{jadwal_id}/{pertemuan}/qr/{id}', [PresensiController::class, 'destroy'])->middleware('admin')->name('qr.destroy');
+
+// Presensi Mahasiswa Route
+Route::get('/dashboard/mhs/presensi', [PresensiMhsController::class, 'index'])->middleware('auth')->name('presensi.mhs');
+Route::post('/dashboard/mhs/presensi', [PresensiMhsController::class, 'store'])->middleware('auth')->name('presensi.mhs.store');
+
 Route::get('/popup', function () {
   return view('popup');
 });
