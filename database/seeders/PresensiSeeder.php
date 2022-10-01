@@ -16,18 +16,18 @@ class PresensiSeeder extends Seeder
   public function run()
   {
     DB::table('presensis')->insert([
-      [
-        'irs_id' => 1,
-        'pertemuan' => 1,
-      ],
-      [
-        'irs_id' => 1,
-        'pertemuan' => 2,
-      ],
-      [
-        'irs_id' => 2,
-        'pertemuan' => 1,
-      ],
+      // [
+      //   'irs_id' => 1,
+      //   'pertemuan' => 1,
+      // ],
+      // [
+      //   'irs_id' => 1,
+      //   'pertemuan' => 2,
+      // ],
+      // [
+      //   'irs_id' => 2,
+      //   'pertemuan' => 1,
+      // ],
     ]);
   }
 }

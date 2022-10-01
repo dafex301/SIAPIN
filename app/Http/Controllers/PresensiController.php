@@ -73,7 +73,10 @@ class PresensiController extends Controller
   public function show(Presensi $presensi)
   {
     // Get the id from url
-    $id = $presensi->id;
+    $url = request()->url();
+
+    // Get the id of IRS from url
+    $id = substr($url, strrpos($url, '/') + 1);
 
     // Get the jadwal from the id
     $jadwal = Jadwal::find($id);
