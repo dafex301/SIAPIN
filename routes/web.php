@@ -61,7 +61,7 @@ Route::post('/dashboard/jadwal/{jadwal_id}/mhs', [IrsController::class, 'store']
 Route::get('/dashboard/presensi', [PresensiController::class, 'index'])->middleware('admin')->name('presensi');
 Route::get('/dashboard/presensi/{presensi}', [PresensiController::class, 'show'])->middleware('admin')->name('presensi.show');
 Route::post('/dashboard/presensi/{presensi}', [PresensiController::class, 'store'])->middleware('admin')->name('presensi.store');
-Route::delete('/dashboard/presensi/{presensi}', [PresensiController::class, 'destroy'])->middleware('admin')->name('presensi.destroy');
+Route::delete('/dashboard/presensi/{id}', [PresensiController::class, 'destroy'])->middleware('admin')->name('presensi.destroy');
 
 // Generate QR Code
 Route::get('/dashboard/presensi/{jadwal_id}/{pertemuan}/qr', [PresensiController::class, 'generateQR'])->middleware('admin')->name('presensi.qr');

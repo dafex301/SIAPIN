@@ -128,11 +128,15 @@ class PresensiController extends Controller
    */
   public function destroy(Presensi $presensi)
   {
-    // Get user id
-    $irs_id = $presensi->id;
+    // Get url
+    $url = request()->url();
+
+    // Get id from url
+    $irs_id = substr($url, strrpos($url, '/') + 1);
 
     // get pertemuan from url parameter p
     $p = request()->p;
+
 
     // Delete the presensi
     Presensi::where('irs_id', $irs_id)->where('pertemuan', $p)->delete();
