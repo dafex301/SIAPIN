@@ -65,7 +65,7 @@
                     class="{{ request()->is('dashboard/mhs/presensi') || request()->is('dashboard/mhs/presensi/*') ? 'fa-solid fa-qrcode pr-2' : 'fa-solid fa-qrcode pr-2 text-gray-400' }}"></i>
                 <p
                     class="{{ request()->is('dashboard/mhs/presensi') || request()->is('dashboard/mhs/presensi/*') ? '' : 'text-gray-400' }}">
-                    Presensi</p>
+                    Scan Presensi</p>
             </div>
         </a>
     @endif
