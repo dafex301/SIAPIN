@@ -11,9 +11,9 @@ Contributions are what make the open source community such an amazing place to l
 If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement". Don't forget to give the project a star! Thanks again!
 
 1. Fork the Project
-2. Create your Own Branch (`git checkout -b mybranch`)
-3. Commit your Changes (`git commit -m 'Add some new feature`)
-4. Push to the Branch (`git push origin mybranch`)
+2. Create your Own Branch (`git checkout -b <branch_name>`)
+3. Commit your Changes (`git commit -m <commit_message>`)
+4. Push to the Branch (`git push origin <project_name>/<location>`)
 5. Open a Pull Request
 
 Alternatively see the GitHub documentation on [creating a pull request](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request).
