@@ -77,14 +77,29 @@ class PresensiMhsController extends Controller
 
   public function show(Presensi  $jadwal_id)
   {
-    // Get jadwal from id 
-    // $jadwal = Jadwal::find($id);
-    dd($jadwal_id->nama);
-    $presensi = Presensi::where('irs_id', $jadwal_id->nama)->get();
+    // Get user ID
+    $user_id = auth()->user()->id;
+
+    // Get IRS ID
+    $irs = Irs::where('user_id', $user_id)->get();
+
+    // Get presensi where where irs_id
+    // Foreach irs
+    // Set array of presensi
+    $presensi = [];
+    foreach ($irs as $key => $value) {
+      $presensi[] = Presensi::where('irs_id', $value->id)->get();
+    }
+
+    // Convert presensi to one dimensional collection
+    $presensi = collect($presensi)->collapse();
+
+    // sort by created_at
+    $presensi = $presensi->sortByDesc('created_at');
+
     return view('dashboard.mhs.presensi.history', [
       'title' => 'Presensi | SIAPIN',
       'presensi' => $presensi
     ]);
   }
 }
-

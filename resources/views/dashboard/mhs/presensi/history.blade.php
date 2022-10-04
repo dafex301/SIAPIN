@@ -27,7 +27,7 @@
                             <div class="flex items-center">
                                 <div class="">
                                     <div class="text-sm font-medium leading-5 text-gray-900">
-                                        {{ $p->irs_id->jadwal_id->nama }}
+                                        {{ $p->irs->jadwal->nama }}
                                     </div>
                                 </div>
                             </div>
