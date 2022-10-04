@@ -16,11 +16,9 @@ class Admin
    */
   public function handle(Request $request, Closure $next)
   {
-    // If the user NIM is 123, then he is admin
-    if ($request->expectsJson()) {
-      if ($request->user()->nim == 123) {
-        return $next($request);
-      }
+    // Check if the user is authenticate and admin
+    if ($request->user() && $request->user()->nim == 123) {
+      return $next($request);
     }
     return redirect('/');
   }
