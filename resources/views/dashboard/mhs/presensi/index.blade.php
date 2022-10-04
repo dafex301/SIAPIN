@@ -39,7 +39,7 @@
                     <input type="text" name="code" id="code" required
                         class="border-2 border-gray-300 rounded-lg p-2 mt-2 focus:outline-none focus:border-blue-500">
                 </div>
-                <button type="submit" id="submit" class="bg-blue-500 text-white rounded-lg px-4 py-2 mt-5" style="display: none;">Submit</button>
+                <button type="submit" id="submit" class="bg-blue-500 text-white rounded-lg px-4 py-2 mt-5">Submit</button>
             </form>
         </div>
     </div>
