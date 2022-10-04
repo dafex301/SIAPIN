@@ -62,10 +62,17 @@
         <a href="/dashboard/mhs/presensi">
             <div class="flex items-center flex-row py-3 pl-3 hover:bg-gray-100 cursor-pointer">
                 <i
-                    class="{{ request()->is('dashboard/mhs/presensi') || request()->is('dashboard/mhs/presensi/*') ? 'fa-solid fa-qrcode pr-2' : 'fa-solid fa-qrcode pr-2 text-gray-400' }}"></i>
-                <p
-                    class="{{ request()->is('dashboard/mhs/presensi') || request()->is('dashboard/mhs/presensi/*') ? '' : 'text-gray-400' }}">
+                    class="{{ request()->is('dashboard/mhs/presensi') ? 'fa-solid fa-qrcode pr-2' : 'fa-solid fa-qrcode pr-2 text-gray-400' }}"></i>
+                <p class="{{ request()->is('dashboard/mhs/presensi') ? '' : 'text-gray-400' }}">
                     Scan Presensi</p>
+            </div>
+        </a>
+        <a href="/dashboard/mhs/presensi/history">
+            <div class="flex items-center flex-row py-3 pl-3 hover:bg-gray-100 cursor-pointer">
+                <i
+                    class="{{ request()->is('dashboard/mhs/presensi/history') ? 'fa-solid fa-clock-rotate-left pr-2' : 'fa-solid fa-clock-rotate-left pr-2 text-gray-400' }}"></i>
+                <p class="{{ request()->is('dashboard/mhs/presensi/history') ? '' : 'text-gray-400' }}">
+                    History Presensi</p>
             </div>
         </a>
     @endif

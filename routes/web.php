@@ -72,6 +72,7 @@ Route::delete('/dashboard/presensi/{jadwal_id}/{pertemuan}/qr/{id}', [PresensiCo
 // Presensi Mahasiswa Route
 Route::get('/dashboard/mhs/presensi', [PresensiMhsController::class, 'index'])->middleware('auth')->name('presensi.mhs');
 Route::post('/dashboard/mhs/presensi', [PresensiMhsController::class, 'store'])->middleware('auth')->name('presensi.mhs.store');
+Route::get('/dashboard/mhs/presensi/history', [PresensiMhsController::class, 'show'])->middleware('auth')->name('presensi.mhs.show');
 
 Route::get('/popup', function () {
   return view('popup');

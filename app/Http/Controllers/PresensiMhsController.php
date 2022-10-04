@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Qr;
 use App\Models\Irs;
 use App\Models\Presensi;
+use App\Models\Jadwal;
 use Illuminate\Http\Request;
 use App\Http\Requests\StorePresensiRequest;
 
@@ -71,5 +72,34 @@ class PresensiMhsController extends Controller
     }
     // Redirect to /dashboard with error message
     return redirect()->route('presensi.mhs.store')->with('error', 'Presensi gagal!');
+  }
+
+
+  public function show()
+  {
+    // Get user ID
+    $user_id = auth()->user()->id;
+
+    // Get IRS ID
+    $irs = Irs::where('user_id', $user_id)->get();
+
+    // Get presensi where where irs_id
+    // Foreach irs
+    // Set array of presensi
+    $presensi = [];
+    foreach ($irs as $key => $value) {
+      $presensi[] = Presensi::where('irs_id', $value->id)->get();
+    }
+
+    // Convert presensi to one dimensional collection
+    $presensi = collect($presensi)->collapse();
+
+    // sort by created_at
+    $presensi = $presensi->sortByDesc('created_at');
+
+    return view('dashboard.mhs.presensi.history', [
+      'title' => 'Presensi | SIAPIN',
+      'presensi' => $presensi
+    ]);
   }
 }
