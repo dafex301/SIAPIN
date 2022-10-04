@@ -75,7 +75,7 @@ class PresensiMhsController extends Controller
   }
 
 
-  public function show(Presensi  $jadwal_id)
+  public function show()
   {
     // Get user ID
     $user_id = auth()->user()->id;
