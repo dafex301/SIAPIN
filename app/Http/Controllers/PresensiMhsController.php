@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Qr;
 use App\Models\Irs;
 use App\Models\Presensi;
+use App\Models\Jadwal;
 use Illuminate\Http\Request;
 use App\Http\Requests\StorePresensiRequest;
 
@@ -72,4 +73,18 @@ class PresensiMhsController extends Controller
     // Redirect to /dashboard with error message
     return redirect()->route('presensi.mhs.store')->with('error', 'Presensi gagal!');
   }
+
+
+  public function show(Presensi  $jadwal_id)
+  {
+    // Get jadwal from id 
+    // $jadwal = Jadwal::find($id);
+    dd($jadwal_id->nama);
+    $presensi = Presensi::where('irs_id', $jadwal_id->nama)->get();
+    return view('dashboard.mhs.presensi.history', [
+      'title' => 'Presensi | SIAPIN',
+      'presensi' => $presensi
+    ]);
+  }
 }
+
