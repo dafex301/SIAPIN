@@ -68,7 +68,6 @@ class JadwalController extends Controller
       'asprak_2' => 'string|nullable',
     ]);
 
-    // Create jadwal
     Jadwal::create($validatedData);
 
     return redirect('/dashboard/jadwal')->with('status', 'Jadwal berhasil ditambahkan!');
