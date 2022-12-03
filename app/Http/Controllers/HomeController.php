@@ -10,6 +10,7 @@ class HomeController extends Controller
   {
     // Check if user is logged in
     if (auth()->check()) {
+      // Check if user is logged in and role is mahasiswa
       // Redirect to dashboard
       return redirect()->intended('dashboard');
     }

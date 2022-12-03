@@ -64,7 +64,6 @@ Route::post('/dashboard/presensi/{presensi}', [PresensiController::class, 'store
 Route::delete('/dashboard/presensi/{id}', [PresensiController::class, 'destroy'])->middleware('admin')->name('presensi.destroy');
 
 
-
 // Generate QR Code
 Route::get('/dashboard/presensi/{jadwal_id}/{pertemuan}/qr', [PresensiController::class, 'generateQR'])->middleware('admin')->name('presensi.qr');
 Route::delete('/dashboard/presensi/{jadwal_id}/{pertemuan}/qr/{id}', [PresensiController::class, 'destroyQR'])->middleware('admin')->name('qr.destroy');
@@ -73,7 +72,3 @@ Route::delete('/dashboard/presensi/{jadwal_id}/{pertemuan}/qr/{id}', [PresensiCo
 Route::get('/dashboard/mhs/presensi', [PresensiMhsController::class, 'index'])->middleware('auth')->name('presensi.mhs');
 Route::post('/dashboard/mhs/presensi', [PresensiMhsController::class, 'store'])->middleware('auth')->name('presensi.mhs.store');
 Route::get('/dashboard/mhs/presensi/history', [PresensiMhsController::class, 'show'])->middleware('auth')->name('presensi.mhs.show');
-
-Route::get('/popup', function () {
-  return view('popup');
-});

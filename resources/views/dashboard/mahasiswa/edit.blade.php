@@ -9,7 +9,7 @@
             </svg>
             <span>Kembali</span>
         </a>
-        <h1 class="text-2xl font-bold my-5">Tambah Mahasiswa</h1>
+        <h1 class="text-2xl font-bold my-5">Edit Mahasiswa</h1>
         <form action="/dashboard/mahasiswa/{{ $mahasiswa->id }}" method="POST">
             @method('put')
             @csrf
